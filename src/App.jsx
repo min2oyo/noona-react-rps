@@ -5,13 +5,13 @@ import Box from './component/Box';
 function App() {
 
   const choice = {
-    Rock: {
-      name: "Rock",
-      img: "https://w7.pngwing.com/pngs/215/800/png-transparent-rock-rock-angle-rectangle-stone.png"
-    },
     Scissor: {
       name: "Scissor",
       img: "https://cdn-icons-png.flaticon.com/512/4975/4975327.png"
+    },
+    Rock: {
+      name: "Rock",
+      img: "https://w7.pngwing.com/pngs/215/800/png-transparent-rock-rock-angle-rectangle-stone.png"
     },
     Paper: {
       name: "Paper",
@@ -20,29 +20,23 @@ function App() {
   };
 
   const [userSelect, setUserSelect] = useState(null);
+  const [aiSelect, setAiSelect] = useState(null);
 
-  // const [aiSelect, setAiSelect] = useState(null);
-  // const kind = [choice.Rock.name, choice.Scissor.name, choice.Paper.name];
-  // setAiSelect(kind[Math.floor(Math.random() * 3) + 1]);
-  // console.log("z", kind[0]);
-
-
-
-  const play = (kind) => {
+  const play = kind => {
     setUserSelect(kind);
-    console.log("클릭", userSelect);
+    setAiSelect(Object.values(choice)[Math.floor(Math.random() * Object.keys(choice).length)]);
   };
 
   return (
     <>
       <div className='main'>
         <Box title="You" item={userSelect} />
-        <Box title="Computer" />
+        <Box title="Computer" item={aiSelect} />
       </div>
       <div className='main'>
-        <button onClick={() => play(choice.Scissor)}>가위</button>
-        <button onClick={() => play(choice.Rock)}>바위</button>
-        <button onClick={() => play(choice.Paper)}>보</button>
+        <button onClick={() => play(Object.values(choice)[0])}>가위</button>
+        <button onClick={() => play(Object.values(choice)[1])}>바위</button>
+        <button onClick={() => play(Object.values(choice)[2])}>보</button>
       </div>
     </>
   );
