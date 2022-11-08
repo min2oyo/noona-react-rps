@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Box from './component/Box';
 
@@ -18,14 +19,24 @@ function App() {
     }
   };
 
+  const [userSelect, setUserSelect] = useState(null);
+
+  // const [aiSelect, setAiSelect] = useState(null);
+  // const kind = [choice.Rock.name, choice.Scissor.name, choice.Paper.name];
+  // setAiSelect(kind[Math.floor(Math.random() * 3) + 1]);
+  // console.log("z", kind[0]);
+
+
+
   const play = (kind) => {
-    console.log("클릭", kind.name);
+    setUserSelect(kind);
+    console.log("클릭", userSelect);
   };
 
   return (
     <>
       <div className='main'>
-        <Box title="You" />
+        <Box title="You" item={userSelect} />
         <Box title="Computer" />
       </div>
       <div className='main'>
