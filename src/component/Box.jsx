@@ -1,7 +1,6 @@
 import '../App.css';
 
 const Box = (props) => {
-  // console.log("<Box />: ", props.item);
   return (
     <>
       <div className="box">

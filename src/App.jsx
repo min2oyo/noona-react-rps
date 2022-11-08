@@ -7,25 +7,25 @@ function App() {
   // DB
   const choice = {
     Scissor: {
-      name: "Scissor",
       img: "https://cdn-icons-png.flaticon.com/512/4975/4975327.png"
     },
     Rock: {
-      name: "Rock",
       img: "https://w7.pngwing.com/pngs/215/800/png-transparent-rock-rock-angle-rectangle-stone.png"
     },
     Paper: {
-      name: "Paper",
       img: "https://t.pimg.jp/062/164/041/5/62164041.jpg"
     }
   };
 
   // 변수
+  const Scissor = Object.values(choice)[0]; // 가위 객체
+  const Rock = Object.values(choice)[1];    // 바위 객체
+  const Paper = Object.values(choice)[2];   // 보 객체
+  const results = ["lose", "win", "tie"];   // 결과
   const [userSelect, setUserSelect] = useState(null); // 사용자
   const [aiSelect, setAiSelect] = useState(null);     // 컴퓨터
   const [userResult, setUserResult] = useState(null); // 사용자 결과
   const [aiResult, setAiResult] = useState(null);     // 컴퓨터 결과
-  const results = ["lose", "win", "ㅋㅋ"];            // 결과
 
   // 함수
   const play = kind => {  // 가위바위보 버튼 클릭
@@ -36,17 +36,17 @@ function App() {
     setUserSelect(user);
     setAiSelect(ai);
 
-    if (user.name === ai.name) {
+    if (user === ai) {  // 무승부
       setUserResult(results[2]);
       setAiResult(results[2]);
-    };
-    if ((user.name === "Scissor" && ai.name === "Rock") || (user.name === "Rock" && ai.name === "Paper") || (user.name === "Paper" && ai.name === "Scissor")) {
-      setUserResult(results[0]);
-      setAiResult(results[1]);
     }
-    if ((user.name === "Scissor" && ai.name === "Paper") || (user.name === "Rock" && ai.name === "Scissor") || (user.name === "Paper" && ai.name === "Rock")) {
+    if ((user === Scissor && ai === Paper) || (user === Rock && ai === Scissor) || (user === Paper && ai === Rock)) { // 유저 승
       setUserResult(results[1]);
       setAiResult(results[0]);
+    }
+    if ((user === Scissor && ai === Rock) || (user === Rock && ai === Paper) || (user === Paper && ai === Scissor)) { // 컴퓨터 승
+      setUserResult(results[0]);
+      setAiResult(results[1]);
     }
 
   };
