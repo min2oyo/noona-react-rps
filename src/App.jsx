@@ -4,6 +4,7 @@ import Box from './component/Box';
 
 function App() {
 
+  // DB
   const choice = {
     Scissor: {
       name: "Scissor",
@@ -19,19 +20,42 @@ function App() {
     }
   };
 
-  const [userSelect, setUserSelect] = useState(null);
-  const [aiSelect, setAiSelect] = useState(null);
+  // 변수
+  const [userSelect, setUserSelect] = useState(null); // 사용자
+  const [aiSelect, setAiSelect] = useState(null);     // 컴퓨터
+  const [userResult, setUserResult] = useState(null); // 사용자 결과
+  const [aiResult, setAiResult] = useState(null);     // 컴퓨터 결과
+  const results = ["lose", "win", "ㅋㅋ"];            // 결과
 
-  const play = kind => {
-    setUserSelect(kind);
-    setAiSelect(Object.values(choice)[Math.floor(Math.random() * Object.keys(choice).length)]);
+  // 함수
+  const play = kind => {  // 가위바위보 버튼 클릭
+
+    let user = kind;  // 유저 선택
+    let ai = Object.values(choice)[Math.floor(Math.random() * Object.keys(choice).length)]; // 컴퓨터 선택
+
+    setUserSelect(user);
+    setAiSelect(ai);
+
+    if (user.name === ai.name) {
+      setUserResult(results[2]);
+      setAiResult(results[2]);
+    };
+    if ((user.name === "Scissor" && ai.name === "Rock") || (user.name === "Rock" && ai.name === "Paper") || (user.name === "Paper" && ai.name === "Scissor")) {
+      setUserResult(results[0]);
+      setAiResult(results[1]);
+    }
+    if ((user.name === "Scissor" && ai.name === "Paper") || (user.name === "Rock" && ai.name === "Scissor") || (user.name === "Paper" && ai.name === "Rock")) {
+      setUserResult(results[1]);
+      setAiResult(results[0]);
+    }
+
   };
 
   return (
     <>
       <div className='main'>
-        <Box title="You" item={userSelect} />
-        <Box title="Computer" item={aiSelect} />
+        <Box title="You" item={userSelect} result={userResult} />
+        <Box title="Computer" item={aiSelect} result={aiResult} />
       </div>
       <div className='main'>
         <button onClick={() => play(Object.values(choice)[0])}>가위</button>
