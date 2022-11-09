@@ -51,6 +51,7 @@ function App() {
 
   };
 
+  // 출력
   return (
     <>
       <div className='main'>
@@ -64,6 +65,7 @@ function App() {
       </div>
     </>
   );
+
 }
 
 export default App;

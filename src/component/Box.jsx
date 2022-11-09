@@ -7,6 +7,7 @@ const Box = (props) => {
   const lose = { border: "5px solid red" };
   const tie = { border: "5px solid black" };
 
+  // 출력
   return (
     <>
       <div className="box" style={props.result === "win" ? win : props.result === "lose" ? lose : tie}>
